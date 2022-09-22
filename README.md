@@ -14,8 +14,8 @@
 # NOTICE !!
 	This  will be completed in October
 **此教學會在十月底前更新完成**
-- [ ] chapter 1  
-- [ ] chapter 2  
+- [x] chapter 1  
+- [x] chapter 2  
 - [ ] chapter 3  
 - [ ] chapter 4  
 - [ ] chapter 5
