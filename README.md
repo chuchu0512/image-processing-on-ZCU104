@@ -16,7 +16,7 @@
 **此教學會在十月底前更新完成**
 - [x] chapter 1  
 - [x] chapter 2  
-- [ ] chapter 3  
+- [x] chapter 3  
 - [ ] chapter 4  
 - [ ] chapter 5
 # contents
@@ -96,7 +96,9 @@
 * Follow the step 2.2 but without create AXI-GPIO, and get block diagram  
 ![](https://i.imgur.com/pfJB0MK.png)  
 ## 3.3 control the IP on Vitis
-* Follow the step 2.3 but we don't create `xgpio_example`. We
+* Follow the step 2.3 but we don't create `xgpio_example`. We open `File/New/Application project` and create `Hello World` template  
+* Follow the code `Vitis_HLS_GPIO.c` to use functions  
+* Launch the FPGA follow 2.4  
 # 4 Vitis part
 ## 4.1 read bmp file data from SD card
 bmp strcture  
