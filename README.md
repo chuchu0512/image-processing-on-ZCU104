@@ -24,7 +24,8 @@
 > 2. Vivado part  
 	2.1. create own verilog IP  
 	2.2. connect SOC and IP using AXI-GPIO  
-	2.3. control the AXI-GPIO on Vitis
+	2.3. control the AXI-GPIO on Vitis  
+	2.4. launch the program to FPGA  
 > 3. Vitis HLS part  
 	3.1. create own C code AXI-IP  
 	3.2. connect SOC and AXI-IP  
@@ -35,14 +36,54 @@
 > 5. full design example using Xilinx ZCU104 board
 # 1 install Xilinx Design Tools on Linux or Windows
 * Go to [Xilinx website](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) download the installer on Linux or Windows and start install.  
-	* Notice on Linux :  
-		you should install 'libncurses5-dev' and 'libncurses5' before install Xilinx Design Tools.  
-* Download [2022 patch](https://support.xilinx.com/s/article/76960?language=en_US) into Xilinx path, follow 'README' file to install.  
-* Open Vivado, enter 'Tools/Setting/Text Editor', find 'Syntax Checking', change 'Sigasi' to 'Vivado'. You should restart Vivado before next project.  
+	* Notice on Linux : you should install `libncurses5-dev` and `libncurses5` before install Xilinx Design Tools.  
+* Download [2022 patch](https://support.xilinx.com/s/article/76960?language=en_US) into Xilinx path, follow `README` file to install.  
+* Open Vivado, enter `Tools/Setting/Text Editor`, find `Syntax Checking`, change `Sigasi` to `Vivado`. You should restart Vivado before next project.  
 # 2 Vivado part
 ## 2.1 create own verilog IP
+* Create new Project
+* Choose RTL Project
+	- [x] Do not specify sources at this time  
+	- [ ] Project is an extensible Vitis platform  
+* find ZCU104 board and choose  
+* Copy `vivado_gray.v` and `tb_vivado_gray.v` into project  
+* Set tb file to top run debug and set function file to top run synthesis check errors  
+* Enter `Tools/Create and Package New IP`, choose Package your current project and export to the path you want to store  
 ## 2.2 connect SOC and IP using AXI-GPIO
+* Create new Project  
+* Enter `Tools/Settings/IP/Repository`, add the IP you create in 2.1  
+* click `Create Block Design` on the left  
+* Add `Zynq UltraScale+ MPSoC` and `click Run Block Automation`  
+* Dobble click enter the IP. set `PS-PL Configuration/PS-PL Interface/Master Interface`use only `AXI HPM0 LPD`  
+	- [x] Enable DDR Controller
+	- [x] SD 1
+	- [x] UART 0 and UART 1  
+* Add AXI-GPIO, set GPIO channel 1 `All Inputs` and channel 2 `All outputs` 32bits  
+* Add own IP, connect GPIO port to data, GPIO2 port to gray  
+![](https://i.imgur.com/KvxdGvf.png)  
+* Run connection Automation and choose All Automation and you will get the block diagram 
+![](https://i.imgur.com/Nec4hjA.png)  
+* Press `F6` to valid design, next `Create HDL Wrapper`, after that `Generate Bitstream`(it takes time)  
+	* if GPIO has different width with IP, it will get warring, you can ignore it  
+* Enter `File/Export/Export Hardware`, choose `include bitstream`, and you will get the `xsa` file  
 ## 2.3 control the AXI-GPIO on Vitis
+* create workplace path, copy the xsa file into the path  
+* Open Vitis and `Create Platform Project` in the workplace path. Named platform project name same as xsa file name, choose your xsa file as `Hardware Specification` and default other selection  
+* Enter `psu_cortex53_0/standalone on psu_cortex53_0/Board Support Package(BSP)`, find `axi_gpio_0` click `Import Example` and create xgpio_example  
+* Follow the `Vitis_GPIO.c` code to use functions  
+* Build the `project` to check error.
+## 2.4 launch the program to FPGA
+* There is 2 ways to launch FPGA  
+	First way :  
+	* We connect USB to local PC and FPGA, and open Serial port moniter(ilke `PuTTY` or `Vitis Serial`)  
+	* Turn `SW6[4:1] as [ON ON ON ON]` and turn power on  
+	* right click project and find `Run As/Launch Hardware`  
+
+	Second way :
+	* build the `system` and you can find the `bin file` in `Debug/sd_card`  
+	* `COPY` the bin file into SD card  
+	* Also connect USB to local PC and FPGA, and open Serial port moniter  
+	* Turn `SW6[4:1] as [OFF OFF OFF ON]` and turn power on  
 # 3 Vitis HLS part
 ## 3.1 create own C code AXI-IP
 ## 3.2 connect the SOC and AXI-IP
