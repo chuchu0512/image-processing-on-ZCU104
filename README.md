@@ -67,7 +67,7 @@
 	* if GPIO has different width with IP, it will get warring, you can ignore it  
 * Enter `File/Export/Export Hardware`, choose `include bitstream`, and you will get the `xsa` file  
 ## 2.3 control the AXI-GPIO on Vitis
-* create workplace path, copy the xsa file into the path  
+* create workspace path, copy the xsa file into the path  
 * Open Vitis and `Create Platform Project` in the workplace path. Named platform project name same as xsa file name, choose your xsa file as `Hardware Specification` and default other selection  
 * Enter `psu_cortex53_0/standalone on psu_cortex53_0/Board Support Package(BSP)`, find `axi_gpio_0` click `Import Example` and create xgpio_example  
 * Follow the `Vitis_GPIO.c` code to use functions  
@@ -86,8 +86,17 @@
 	* Turn `SW6[4:1] as [OFF OFF OFF ON]` and turn power on  
 # 3 Vitis HLS part
 ## 3.1 create own C code AXI-IP
+* Create workspace and open Vitis HLS  
+* Create Project, add code `gray_HLS.c` file and set `Top Function` as main function  
+	* testbench is not necessary because we can test on other C code compiler like dev-C or g++ on Linux  
+* Part Selection we choose `ZCU104 board`  
+* Run `C SYNTHESIS` check error. If there is no error, we click `Export RTL` and choose the path that want to store zip file  
+* After export, unzip the file  
 ## 3.2 connect the SOC and AXI-IP
+* Follow the step 2.2 but without create AXI-GPIO, and get block diagram  
+![](https://i.imgur.com/pfJB0MK.png)  
 ## 3.3 control the IP on Vitis
+* Follow the step 2.3 but we don't create `xgpio_example`. We
 # 4 Vitis part
 ## 4.1 read bmp file data from SD card
 bmp strcture  
