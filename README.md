@@ -20,7 +20,7 @@
 - [ ] chapter 4  
 - [ ] chapter 5
 # contents
-> 1. install Xilinx Design Tools on Linux or Windows
+> 1. install Xilinx Design Tools on Linux or Windows  
 > 2. Vivado part  
 	2.1. create own verilog IP  
 	2.2. connect SOC and IP using AXI-GPIO  
@@ -34,6 +34,11 @@
 	4.2. using PS-DDR4 to store data
 > 5. full design example using Xilinx ZCU104 board
 # 1 install Xilinx Design Tools on Linux or Windows
+* Go to [Xilinx website](https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools.html) download the installer on Linux or Windows and start install.  
+	* Notice on Linux :  
+		you should install 'libncurses5-dev' and 'libncurses5' before install Xilinx Design Tools.  
+* Download [2022 patch](https://support.xilinx.com/s/article/76960?language=en_US) into Xilinx path, follow 'README' file to install.  
+* Open Vivado, enter 'Tools/Setting/Text Editor', find 'Syntax Checking', change 'Sigasi' to 'Vivado'. You should restart Vivado before next project.  
 # 2 Vivado part
 ## 2.1 create own verilog IP
 ## 2.2 connect SOC and IP using AXI-GPIO
