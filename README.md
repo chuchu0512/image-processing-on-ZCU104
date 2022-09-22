@@ -11,14 +11,8 @@
 
 * Also, we boot FPGA by bin file, so we don't need petalinux.
 
-# NOTICE !!
-	This  will be completed in October
-**此教學會在十月底前更新完成**
-- [x] chapter 1  
-- [x] chapter 2  
-- [x] chapter 3  
-- [ ] chapter 4  
-- [ ] chapter 5
+* Notice that the **`main work`** is image processing IP design by writting **`Verilog code on Vivado`** or **`C code on Vitis HLS`**  
+
 # contents
 > 1. install Xilinx Design Tools on Linux or Windows  
 > 2. Vivado part  
@@ -144,5 +138,11 @@ bmp strcture
 FatFs  
 * we can use [FatFs website](http://elm-chan.org/fsw/ff/00index_e.html) to check usage of FatFs functions  
 
-## 4.2 using PS-DDR4 to store data
+Scan data flow
+* define i1 is height, i2 is 3*width, then each data in the image is `3*width*i1 + i2`  
+
+## 4.2 using PS-DDR4 to store data  
+* PS side DDR4 address from 0x0000_0000 to 0x3fff_ffff. But we usually start use from 0x1000_0000 to avoid some issue in DDR4 address  
+
 # 5 full design example using Xillinx ZCU104 board
+* follow the code `Vitis_example.c`, after that, you can start your design on image processing  
