@@ -1,4 +1,4 @@
-# image processing ZCU104
+# image processing on ZCU104
 * Using Xilinx Design Tools such as Vivado、Vitis and Vitis HLS to do image processing design on Linux or Windows and processing on ZCU104.  
 
 * We use Vivado to create main image processing function (IP) by Verilog, and connect ZYNQMP SOC and IP by AXI-lite bridge, here we use the simple way called AXI-GPIO.  
