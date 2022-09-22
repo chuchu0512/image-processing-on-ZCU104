@@ -46,7 +46,7 @@
 	- [x] Do not specify sources at this time  
 	- [ ] Project is an extensible Vitis platform  
 * find ZCU104 board and choose  
-* Copy `vivado_gray.v` and `tb_vivado_gray.v` into project  
+* Copy `gray.v` and `tb_gray.v` into project  
 * Set tb file to top run debug and set function file to top run synthesis check errors  
 * Enter `Tools/Create and Package New IP`, choose Package your current project and export to the path you want to store  
 ## 2.2 connect SOC and IP using AXI-GPIO
